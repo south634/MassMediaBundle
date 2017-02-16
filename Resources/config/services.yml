@@ -1,0 +1,10 @@
+services:
+    south634_mass_media.manager:
+        class: South634\MassMediaBundle\Util\MassMediaManager
+        arguments: ['%south634_mass_media_settings%']
+        
+    south634_mass_media.twig.extension:
+        class: South634\MassMediaBundle\Twig\South634MassMediaExtension
+        arguments: ['@south634_mass_media.manager']
+        tags:
+            - { name: twig.extension }
