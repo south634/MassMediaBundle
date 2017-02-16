@@ -3,7 +3,7 @@ A Symfony bundle for creating hashed filenames from uploaded files, and spreadin
 
 You can set the hashing algorithm you want to use to create filenames, how many folders deep you want the files to be stored, and how many characters to use per folder name. It uses the leading characters in the hashed filename to create the folder names.
 
-For example, given 'sha1' as your hashing algo, you might get a filename like this:
+For example, given `sha1` as your hashing algo, you might get a filename like this:
 
 `3882be53dbfc4a0a4305fba989d224b863fe8cfd.jpg`
 
@@ -17,13 +17,58 @@ Setting folder character length: 3, and folder depth: 1, would store the file he
 
 This functionality may be useful for those that do not want to have too many files residing in any single directory.
 
-## Setup
 
-Set your configuration in config.yml.
+Installation
+============
 
-The minimum required settings are given in an example below:
+Step 1: Download the Bundle
+---------------------------
+
+Open a command console, enter your project directory and execute the following command:
+
+```console
+$ composer require south634/mass-media-bundle "dev-master"
+```
+
+This command requires you to have Composer installed globally, as explained in the [installation chapter](https://getcomposer.org/doc/00-intro.md) of the Composer documentation.
+
+Step 2: Enable the Bundle
+-------------------------
+
+Then, enable the bundle by adding it to the list of registered bundles in the `app/AppKernel.php` file of your project:
+
+```php
+<?php
+// app/AppKernel.php
+
+// ...
+class AppKernel extends Kernel
+{
+    public function registerBundles()
+    {
+        $bundles = array(
+            // ...
+
+            new South634\MassMediaBundle\South634MassMediaBundle(),
+        );
+
+        // ...
+    }
+
+    // ...
+}
+```
+
+Step 3: Add Settings
+-------------------------
+
+Finally, configure the required settings as you wish in the `app/config/config.yml` file of your project.
+
+See example below:
+
 ```
 # app/config/config.yml
+
 south634_mass_media:
     settings:
         hash_algo: sha1
@@ -62,10 +107,11 @@ Name of the web accessible directory in your Symfony application. Defaults to 'w
 
 Absolute path to the root directory of your Symfony application. Defaults to '%kernel.root_dir%'.
 
-How to use
-------
+Usage
+=======
 
-### MassMediaManager service
+MassMediaManager
+------------------
 
 Get the MassMediaManager service in your Controller like so:
 
